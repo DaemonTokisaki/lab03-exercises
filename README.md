@@ -56,6 +56,59 @@ if __name__ == "__main__":
     print("Sample 3:", find_duplicates_nested_loop(sample3))
     print("Sample 4:", find_duplicates_nested_loop(sample4))
 
+
+
+JavaHash 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
+public class FindDuplicates{
+
+    public static List<Integer> findDuplicatesNestedLoops(List<Integer> list) {
+        List<Integer> dupes= new ArrayList<>();   
+        HashMap<Integer,Integer> check = new HashMap<>();
+        
+        for(int i=0;i<list.size();i++){
+     
+        	int target = list.get(i);
+        	if(check.containsKey(target)){
+        		check.put(target,check.get(target)+1 );
+        		
+        	} else {
+        		check.put(target,1);
+        	}
+     
+}  
+        for(int i= 0;i<check.size();i++) {
+        	int du= (int) check.keySet().toArray()[i];
+        
+        if(check.get(du)>1) {
+        	
+        dupes.add(du);
+        }
+        
+        }
+		return dupes;
+    }
+
+    public static void main(String[] args) {
+        // some test strings:
+        List<Integer> sample1 = new ArrayList<Integer>(Arrays.asList(3, 7, 5, 6, 7, 4, 8, 5, 7, 66));
+        List<Integer> sample2 = new ArrayList<Integer>(Arrays.asList(3, 5, 6, 4, 4, 5, 66, 6, 7, 6));
+        List<Integer> sample3 = new ArrayList<Integer>(Arrays.asList(3, 0, 5, 1, 0));
+        List<Integer> sample4 = new ArrayList<Integer>(Arrays.asList(3));
+        System.out.println("Sample 1: " + findDuplicatesNestedLoops(sample1));
+        System.out.println("Sample 2: " + findDuplicatesNestedLoops(sample2));
+        System.out.println("Sample 3: " + findDuplicatesNestedLoops(sample3));
+        System.out.println("Sample 4: " + findDuplicatesNestedLoops(sample4));
+    }
+
+}
+
+
 Describe Different Approaches to Solving This Problem
 I would think the issue with the nested loop is that it would have to go through each list for every integer so the time complexity would be o(n^2) while 
 for the map it would store each int seen in the list in a hash table and check if it had already appeared

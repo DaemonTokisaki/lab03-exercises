@@ -1,33 +1,35 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
-public class FindDuplicates {
+public class FindDuplicates{
 
     public static List<Integer> findDuplicatesNestedLoops(List<Integer> list) {
-    List<Integer> dupes= new ArrayList<>();   
-     
+        List<Integer> dupes= new ArrayList<>();   
+        HashMap<Integer,Integer> check = new HashMap<>();
+        
         for(int i=0;i<list.size();i++){
      
-for(int j=0;j<list.size();j++){
-if(i!=j){
-        if(list.get(i)==list.get(j)){
-            
-            if(!dupes.contains(list.get(i))){
-                dupes.add(list.get(i));
-                
-            }
-
-}    
+        	int target = list.get(i);
+        	if(check.containsKey(target)){
+        		check.put(target,check.get(target)+1 );
+        		
+        	} else {
+        		check.put(target,1);
+        	}
      
-}    
-     
-}    
-     
-     
-}    
-return dupes;
-     
+}  
+        for(int i= 0;i<check.size();i++) {
+        	int du= (int) check.keySet().toArray()[i];
+        
+        if(check.get(du)>1) {
+        	
+        dupes.add(du);
+        }
+        
+        }
+		return dupes;
     }
 
     public static void main(String[] args) {
